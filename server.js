@@ -1,6 +1,7 @@
 // Dependencies
 // =============================================================
 var express = require("express");
+var bodyParser = require('body-parser')
 var path = require("path");
 
 // Sets up the Express App
@@ -11,6 +12,14 @@ var PORT = process.env.PORT || 3000;
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+ 
+// parse application/json
+app.use(bodyParser.json())
+
+require('./app/routing/html-routes.js')(app);
 
 // Starts the server to begin listening
 // =============================================================
